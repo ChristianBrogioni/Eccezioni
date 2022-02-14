@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button scrivi;
     EditText nome;
     TextView txtFile;
-    Gestore gest= new Gestore();
+    Gestore gest= new Gestore(); //istanza della classe Gestore
 
 
 
@@ -33,22 +33,21 @@ public class MainActivity extends AppCompatActivity {
         txtFile= findViewById(R.id.txtFile);
 
 
-        scrivi.setOnClickListener(new View.OnClickListener() {
+        scrivi.setOnClickListener(new View.OnClickListener() { //rende cliccabile il bottone scrivi
             @Override
             public void onClick(View v) {
-                String esito= gest.scriviFile(nome.getText().toString(), getApplicationContext());
-                Toast.makeText(getApplicationContext(), esito, Toast.LENGTH_LONG).show();
+                String esito= gest.scriviFile(nome.getText().toString(), getApplicationContext()); //assegno ad esito la stringa che ottengo eseguendo il metodo scriviFile a cui passo come parametri il nome del file (ottenuto dall'editText) e il contesto
+                Toast.makeText(getApplicationContext(), esito, Toast.LENGTH_LONG).show(); //visualizzo un toast con l'esito
 
             }
         });
 
-        leggi.setOnClickListener(new View.OnClickListener() {
+        leggi.setOnClickListener(new View.OnClickListener() { //rende cliccabile il bottone leggi
             @Override
             public void onClick(View v) {
                 Context c= getApplicationContext();
-                String percorso= c.getPackageResourcePath();
-                String scritta= gest.leggiFile(nome.getText().toString(), c);
-                txtFile.setText(scritta);
+                String scritta= gest.leggiFile(nome.getText().toString(), c); //assegno a scritta la stringa che ottengo eseguendo il metodo leggiFile a cui passo come parametri il nome del file e il contesto
+                txtFile.setText(scritta); //imposto scritta come testo visualizzato nella textView
 
             }
         });
