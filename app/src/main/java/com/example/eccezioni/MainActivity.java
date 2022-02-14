@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button scrivi;
     EditText nome;
     TextView txtFile;
-    Gestore gest;
-
+    Gestore gest= new Gestore();
 
 
 
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         scrivi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String esito= gest.scriviFile("prova.txt", getApplicationContext());
+                String esito= gest.scriviFile(nome.getText().toString(), getApplicationContext());
                 Toast.makeText(getApplicationContext(), esito, Toast.LENGTH_LONG).show();
 
             }
@@ -48,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Context c= getApplicationContext();
                 String percorso= c.getPackageResourcePath();
+                String scritta= gest.leggiFile(nome.getText().toString(), c);
+                txtFile.setText(scritta);
 
             }
         });

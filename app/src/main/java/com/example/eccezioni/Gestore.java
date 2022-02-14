@@ -15,9 +15,6 @@ public class Gestore {
 
     public String nomeFile;
 
-    public Gestore(String nomeFile){
-        this.nomeFile= nomeFile;
-    }
 
     public String leggiFile(String nomeFile, Context c){
 
