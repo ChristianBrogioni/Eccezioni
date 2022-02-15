@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scrivi= findViewById(R.id.scrivi);
+        scrivi= findViewById(R.id.scrivi); //recupero i riferimenti degli oggetti grafici
         leggi= findViewById(R.id.leggi);
         nome= findViewById(R.id.nomeFile);
         txtFile= findViewById(R.id.txtFile);

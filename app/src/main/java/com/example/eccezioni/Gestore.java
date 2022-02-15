@@ -23,7 +23,7 @@ public class Gestore {
         try{
             BufferedReader filein= new BufferedReader(new InputStreamReader(c.openFileInput(nomeFile))); //trasforma uno stream di byte in uno stream di caratteri
             String testoDaRestituire;
-            while((testoDaRestituire=filein.readLine())!=null){ //con il metodo readline leggo che le righe del file
+            while((testoDaRestituire=filein.readLine())!=null){ //con il metodo readline leggo le righe del file
                 sb.append(testoDaRestituire+"\n"); //se la riga è diversa da null aggiungo allo string builder il contenuto della riga
             }
 
