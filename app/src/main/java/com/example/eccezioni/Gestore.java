@@ -1,12 +1,15 @@
 package com.example.eccezioni;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
@@ -23,7 +26,7 @@ public class Gestore {
         try{
             BufferedReader filein= new BufferedReader(new InputStreamReader(c.openFileInput(nomeFile))); //trasforma uno stream di byte in uno stream di caratteri
             String testoDaRestituire;
-            while((testoDaRestituire=filein.readLine())!=null){ //con il metodo readline leggo le righe del file
+            while((testoDaRestituire=filein.readLine())!=null){ //Ciclo fino a quando il contenuto della riga non è null. Con il metodo readline leggo le righe del file
                 sb.append(testoDaRestituire+"\n"); //se la riga è diversa da null aggiungo allo string builder il contenuto della riga
             }
 
@@ -61,5 +64,22 @@ public class Gestore {
 
     }
 
-}
+    public String leggiFileRaw(Context c){
+        Resources res= c.getResources(); //andiamo nell'area della ram in cui è contenuta l'activity e più in particolare dove c'è il puntatore di res
+        InputStream is= res.openRawResource(R.raw.brani); //l'eccezione non c'è perchè il file deve esistere, se non esiste mi da l'errore l'ide. Se gli passassi dinamicamente il nome del file otterrei un errore run time dato che è un'eccezione non controllata
+        return "";
+    }
 
+    public String leggiFileAssets(Context c){
+        AssetManager am= c.getAssets();
+        try {
+            InputStream is= am.open("brani.txt"); //in questo caso il file non ha un puntatore sulla ram, quindi se non creo un try e catch il metodo open mi genera un errore in quanto il nome del file inserito da noi programmatori potrebbe essere errato
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+
+}
