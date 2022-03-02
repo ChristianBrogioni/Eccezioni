@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button leggi;
     Button scrivi;
+    Button leggiRaw;
+    Button leggiAssets;
     EditText nome;
     TextView txtFile;
     Gestore gest= new Gestore(); //istanza della classe Gestore
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         scrivi= findViewById(R.id.scrivi); //recupero i riferimenti degli oggetti grafici
         leggi= findViewById(R.id.leggi);
+        leggiRaw= findViewById(R.id.leggiRaw);
+        leggiAssets= findViewById(R.id.leggiAssets);
         nome= findViewById(R.id.nomeFile);
         txtFile= findViewById(R.id.txtFile);
 
@@ -49,6 +53,24 @@ public class MainActivity extends AppCompatActivity {
                 String scritta= gest.leggiFile(nome.getText().toString(), c); //assegno a scritta la stringa che ottengo eseguendo il metodo leggiFile a cui passo come parametri il nome del file e il contesto
                 txtFile.setText(scritta); //imposto scritta come testo visualizzato nella textView
 
+            }
+        });
+
+        leggiRaw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context c= getApplicationContext();
+                String scritta= gest.leggiFileRaw(c);
+                txtFile.setText(scritta);
+            }
+        });
+
+        leggiAssets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context c= getApplicationContext();
+                String scritta= gest.leggiFileAssets(c);
+                txtFile.setText(scritta);
             }
         });
     }

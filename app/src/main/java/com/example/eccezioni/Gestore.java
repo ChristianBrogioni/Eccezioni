@@ -67,18 +67,38 @@ public class Gestore {
     public String leggiFileRaw(Context c){
         Resources res= c.getResources(); //andiamo nell'area della ram in cui è contenuta l'activity e più in particolare dove c'è il puntatore di res
         InputStream is= res.openRawResource(R.raw.brani); //l'eccezione non c'è perchè il file deve esistere, se non esiste mi da l'errore l'ide. Se gli passassi dinamicamente il nome del file otterrei un errore run time dato che è un'eccezione non controllata
-        return "";
+        StringBuilder sb= new StringBuilder();
+        try{
+            BufferedReader filein= new BufferedReader(new InputStreamReader(is));
+            String testoDaRestituire;
+            while((testoDaRestituire=filein.readLine())!=null){
+                sb.append(testoDaRestituire+"\n");
+            }
+        }
+        catch (IOException e) {
+            Log.e("Gestore", "Impossibile leggere il file");
+        }
+
+        return sb.toString();
+
     }
 
     public String leggiFileAssets(Context c){
         AssetManager am= c.getAssets();
+        StringBuilder sb= new StringBuilder();
         try {
             InputStream is= am.open("brani.txt"); //in questo caso il file non ha un puntatore sulla ram, quindi se non creo un try e catch il metodo open mi genera un errore in quanto il nome del file inserito da noi programmatori potrebbe essere errato
+            BufferedReader filein= new BufferedReader(new InputStreamReader(is));
+            String testoDaRestituire;
+            while((testoDaRestituire=filein.readLine())!=null){
+                sb.append(testoDaRestituire+"\n");
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "";
+        return sb.toString();
     }
 
 
