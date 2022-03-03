@@ -24,7 +24,7 @@ public class Gestore {
         StringBuilder sb= new StringBuilder(); //istanza oggetto StringBuilder chiamato sb, conterrà tutto il contenuto del file
 
         try{
-            BufferedReader filein= new BufferedReader(new InputStreamReader(c.openFileInput(nomeFile))); //trasforma uno stream di byte in uno stream di caratteri
+            BufferedReader filein= new BufferedReader(new InputStreamReader(c.openFileInput(nomeFile))); //input stream reader trasforma uno stream di byte in uno stream di caratteri
             String testoDaRestituire;
             while((testoDaRestituire=filein.readLine())!=null){ //Ciclo fino a quando il contenuto della riga non è null. Con il metodo readline leggo le righe del file
                 sb.append(testoDaRestituire+"\n"); //se la riga è diversa da null aggiungo allo string builder il contenuto della riga
@@ -65,8 +65,8 @@ public class Gestore {
     }
 
     public String leggiFileRaw(Context c){
-        Resources res= c.getResources(); //andiamo nell'area della ram in cui è contenuta l'activity e più in particolare dove c'è il puntatore di res
-        InputStream is= res.openRawResource(R.raw.brani); //l'eccezione non c'è perchè il file deve esistere, se non esiste mi da l'errore l'ide. Se gli passassi dinamicamente il nome del file otterrei un errore run time dato che è un'eccezione non controllata
+        Resources res= c.getResources(); //andiamo nell'area della ram in cui è contenuta l'activity e più in particolare dove c'è il puntatore di res. Non è un file explorer
+        InputStream is= res.openRawResource(R.raw.brani); //l'eccezione non c'è perchè il file deve esistere, se non esiste mi da l'errore l'ide. Se gli passassi dinamicamente il nome del file otterrei un errore run time dato che è un'eccezione non controllata. All'interno di raw non posso inserire file con nomi uguali anche se con ext diverse
         StringBuilder sb= new StringBuilder();
         try{
             BufferedReader filein= new BufferedReader(new InputStreamReader(is));
@@ -94,7 +94,11 @@ public class Gestore {
                 sb.append(testoDaRestituire+"\n");
             }
 
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+         catch (IOException e) {
             e.printStackTrace();
         }
 

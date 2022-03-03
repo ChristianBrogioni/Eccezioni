@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Button leggiAssets;
     EditText nome;
     TextView txtFile;
-    Gestore gest= new Gestore(); //istanza della classe Gestore
+    Gestore gest= new Gestore(); //istanza della classe Gestore, se non la istanzio non posso utilizzare i metodi della classe Gestore. Avrei un errore a runtime
 
 
 
