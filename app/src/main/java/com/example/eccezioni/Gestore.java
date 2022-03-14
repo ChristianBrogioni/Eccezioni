@@ -5,6 +5,9 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -105,5 +108,40 @@ public class Gestore {
         return sb.toString();
     }
 
+    public DatiBrano leggiJsonRaw (Context c) throws JSONException{
+
+        StringBuilder sb= new StringBuilder();
+        try{
+            Resources res= c.getResources(); //andiamo nell'area della ram in cui è contenuta l'activity e più in particolare dove c'è il puntatore di res. Non è un file explorer
+            InputStream is= res.openRawResource(R.raw.brano);
+            BufferedReader filein= new BufferedReader(new InputStreamReader(is));
+            String s= null;
+            while((  s = filein.readLine())!=null) {
+            sb.append(s);
+            sb.append("\n");
+            }
+        }
+        catch(IOException e){
+            Log.e("Gestore", "Impossibile leggere il file");
+        }
+
+        String jsonText= sb.toString();
+
+            JSONObject jsonData= new JSONObject(jsonText);
+            String titolo= jsonData.getString("titolo");
+            String autore= jsonData.getString("autore");
+            String genere= jsonData.getString("genere");
+            int durata= jsonData.getInt("durata");
+
+            DatiBrano brano= new DatiBrano();
+            brano.setTitolo(titolo);
+            brano.setAutore(autore);
+            brano.setGenere(genere);
+            brano.setDurata(durata);
+
+
+        return brano;
+
+    }
 
 }

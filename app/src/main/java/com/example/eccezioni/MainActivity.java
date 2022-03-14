@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Button scrivi;
     Button leggiRaw;
     Button leggiAssets;
+    Button leggiJsonRaw;
     EditText nome;
     TextView txtFile;
     Gestore gest= new Gestore(); //istanza della classe Gestore, se non la istanzio non posso utilizzare i metodi della classe Gestore. Avrei un errore a runtime
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         leggi= findViewById(R.id.leggi);
         leggiRaw= findViewById(R.id.leggiRaw);
         leggiAssets= findViewById(R.id.leggiAssets);
+        leggiJsonRaw= findViewById(R.id.jsonRaw);
         nome= findViewById(R.id.nomeFile);
         txtFile= findViewById(R.id.txtFile);
 
@@ -71,6 +75,20 @@ public class MainActivity extends AppCompatActivity {
                 Context c= getApplicationContext();
                 String scritta= gest.leggiFileAssets(c);
                 txtFile.setText(scritta);
+            }
+        });
+
+        leggiJsonRaw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context c= getApplicationContext();
+                DatiBrano dati= null;
+                try {
+                    dati = gest.leggiJsonRaw(c);
+                    txtFile.setText(dati.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
