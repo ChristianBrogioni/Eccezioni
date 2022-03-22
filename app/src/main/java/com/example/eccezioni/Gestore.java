@@ -112,13 +112,13 @@ public class Gestore {
 
         StringBuilder sb= new StringBuilder();
         try{
-            Resources res= c.getResources(); //andiamo nell'area della ram in cui è contenuta l'activity e più in particolare dove c'è il puntatore di res. Non è un file explorer
+            Resources res= c.getResources();
             InputStream is= res.openRawResource(R.raw.brano);
             BufferedReader filein= new BufferedReader(new InputStreamReader(is));
             String s= null;
             while((  s = filein.readLine())!=null) {
-            sb.append(s);
-            sb.append("\n");
+                sb.append(s);
+                sb.append("\n");
             }
         }
         catch(IOException e){
@@ -127,7 +127,7 @@ public class Gestore {
 
         String jsonText= sb.toString();
 
-            JSONObject jsonData= new JSONObject(jsonText);
+            JSONObject jsonData= new JSONObject(jsonText); //parsing. Trasformo in un oggetto JSON il file json
             String titolo= jsonData.getString("titolo");
             String autore= jsonData.getString("autore");
             String genere= jsonData.getString("genere");

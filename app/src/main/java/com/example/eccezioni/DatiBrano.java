@@ -38,4 +38,17 @@ public class DatiBrano {
     public void setDurata(int durata) {
         this.durata = durata;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n titolo:" + this.titolo);
+        sb.append("\n autore:" + this.autore);
+        sb.append("\n genere:" + this.genere);
+        sb.append("\n durata:" + this.durata);
+
+        return sb.toString();
+    }
+
 }
